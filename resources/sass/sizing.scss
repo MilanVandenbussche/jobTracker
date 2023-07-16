@@ -1,0 +1,33 @@
+@for $i from 0 through 100 {
+    .sq-#{$i} {
+        width: #{$i}px !important;
+        height: #{$i}px !important;
+    }
+    .w-px-#{$i}{
+        width: #{$i}px !important;
+    }
+    .h-px-#{$i}{
+        height: #{$i}px !important;
+    }
+};
+$sizes: (
+    'xs': 50,
+    'sm': 80,
+    'base': 100,
+    'lg': 150,
+    'xl': 200,
+    '2xl': 250,
+    '3xl': 300,
+    '4xl': 350,
+    '5xl': 400,
+    '6xl': 450,
+    '7xl': 500,
+    '8xl': 550,
+    '9xl': 600,
+);
+@each $size, $value in $sizes {
+.sq-#{$size}{
+    width: #{$value}px;
+    height: #{$value}px;
+}
+}
