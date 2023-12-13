@@ -24,8 +24,10 @@
             <legend>Job Title <sup class="text-primary">*</sup></legend>
             <div class="d-flex gap-3">
                 <div v-for="language in languages" class="form-floating flex-grow-1">
-                    <input :key="language.id" type="text" :name="'job_title_' + language.language_code"
-                           :id="'job_title_' + language.language_code" class="form-control"
+                    <input :key="language.id" type="text"
+                           :name="'job_title_' + language.language_code"
+                           :id="'job_title_' + language.language_code"
+                           class="form-control"
                            :class="['job_title_' + language.language_code in errors ? 'is-invalid' : '']"
                            :placeholder="'job_title_' + language.language_code">
                     <label :for="'job_title_' + language.language_code">{{ language.language_code }}</label>

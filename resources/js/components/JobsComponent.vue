@@ -40,7 +40,7 @@
             </div>
             <div class="d-flex gap-3">
                 <div v-for="media in job.media">
-                    <img :src="'assets/jobs/md_' + media.media_name + '.' + media.media_ext" :alt="job.job_lang.job_title" class="sq-3xl object-fit-contain rounded-3 shadow">
+                    <img :src="'assets/jobs/xl_' + media.media_name + '.' + media.media_ext" :alt="job.job_lang.job_title" class="object-fit-cover rounded-3 shadow">
                 </div>
             </div>
             <div v-if="admin" class="d-flex justify-content-between align-items-center gap-3 mt-3">

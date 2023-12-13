@@ -31,6 +31,16 @@ class AuthController extends Controller
         }
     }
 
+    public function logout(Request $request)
+    {
+        $userId = $request['user_id'];
+        $user = User::findOrFail($userId);
+        $user->tokens()->delete();
+        $user->setRememberToken(null);
+        $user->save();
+        return response()->json(["status" => "success"], 200);
+    }
+
     public function register(Request $request)
     {
         $this->validate($request, [

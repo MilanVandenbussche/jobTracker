@@ -29,6 +29,15 @@ const store = createStore({
         },
         changePage(state, page){
             state.currentPage = page;
+        },
+    },
+    actions: {
+        signOut() {
+            axios.post('api/logout').then(() => {
+                this.commit('setAuthentication', false);
+                this.commit('setAdmin', false);
+                this.commit('changePage', 'login');
+            });
         }
     }
 })

@@ -26,6 +26,9 @@
                 <p class="fs-3 m-0 fw-bold">
                     {{ userData ? userData.firstName + ' ' + userData.lastName : ''}}
                 </p>
+                <div class="cursor-pointer" @click="signOut">
+                    <i class="fas fa-sign-out"></i>
+                </div>
             </div>
         </section>
 </template>
@@ -39,8 +42,9 @@ export default {
         changePage(page) {
             this.$store.commit('changePage', page);
         },
-    },
-    mounted() {
+        signOut() {
+            this.$store.commit('signOut');
+        }
     },
 }
 </script>
