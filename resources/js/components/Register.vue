@@ -14,9 +14,7 @@
             <div>
                 <select v-model="language" class="form-select border-secondary-subtle h-100" aria-label="Default select example">
                     <option value="0" selected hidden>Language</option>
-                    <option value="NL">NL</option>
-                    <option value="FR">FR</option>
-                    <option value="EN">EN</option>
+                    <option v-for="language in languages" :key="language.id" :value="language.id">{{ language.language_code }}</option>
                 </select>
             </div>
         </div>
@@ -39,19 +37,15 @@
         </div>
         <div class="input-group">
             <div class="form-floating has-validation">
-                <input v-model="password_confirm" :type="[showPasswordConfirm ? 'text' : 'password']"
+                <input :disabled="!password" v-model="password_confirm" :type="[showPasswordConfirm ? 'text' : 'password']"
                        class="form-control border-end-0" :class="[password_match ? 'border-secondary-subtle' : 'border-danger']" name="password-confirm"
                        id="password_confirm" placeholder="password">
                 <label for="password-confirm" class="text-capitalize">confirm password</label>
             </div>
-            <button type="button" @click="showPasswordConfirm = !showPasswordConfirm"
+            <button :disabled="!password" type="button" @click="showPasswordConfirm = !showPasswordConfirm"
                     class="btn border border-start-0" :class="[password_match ? 'border-secondary-subtle' : 'border-danger']">
                 <i class="far fa-eye text-secondary"></i>
             </button>
-        </div>
-        <div class="form-check form-switch">
-            <input v-model="admin" class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
-            <label class="form-check-label" for="flexSwitchCheckDefault">Admin</label>
         </div>
         <div class="d-flex align-items-center gap-3">
             <button type="submit" class="btn btn-outline-primary px-5 py-3">Continue</button>
@@ -77,7 +71,7 @@ export default {
             email: '',
             password: '',
             password_confirm: '',
-            admin: false,
+            languages: [],
 
             message: [
                 status => null,
@@ -86,15 +80,25 @@ export default {
         }
     },
     methods: {
+        async getLanguages() {
+            try {
+                const response = await axios.get('/api/languages/all', {})
+                if(response.data.languages){
+                    console.log(response.data.languages);
+                    this.languages = response.data.languages;
+                }
+            }catch(e) {
+                console.error(e.response.data.message);
+            }
+        },
         submitForm(){
             if(this.password === this.password_confirm){
                 axios.post('/api/register', {
                     first_name: this.firstname,
                     last_name: this.lastname,
-                    language: this.language,
+                    language_id: this.language,
                     email: this.email,
                     password: this.password,
-                    admin: this.admin,
                 }).then( r => {
                     const  { status, remember_token } = r.data;
                     if(status === 'success'){
@@ -111,5 +115,21 @@ export default {
             }
         }
     },
+    watch: {
+        password_confirm(){
+            if(this.password === this.password_confirm){
+                this.password_match = true;
+                this.message.status = null;
+                this.message.text = null;
+            }else{
+                this.password_match = false;
+                this.message.status = 'error';
+                this.message.text = 'Passwords do not match';
+            }
+        }
+    },
+    mounted() {
+        this.getLanguages();
+    }
 }
 </script>

@@ -189,7 +189,7 @@ export default {
             if (!document.getElementById('publish_date').value) {
                 this.errors['publish_date'] = {"message": "This field is required"};
             }
-            const fields = ["job_title", "job_company", "job_qualifications", "job_offer"];
+            const fields = ["job_title", "job_company", "job_description", "job_qualifications", "job_offer"];
             let data = {};
             this.languages.forEach((language) => {
                 let formData = {};

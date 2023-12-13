@@ -43,7 +43,7 @@ export default {
             this.$store.commit('changePage', page);
         },
         signOut() {
-            this.$store.commit('signOut');
+            this.$store.dispatch('signOut');
         }
     },
 }

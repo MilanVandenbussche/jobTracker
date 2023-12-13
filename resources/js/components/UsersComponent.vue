@@ -47,7 +47,7 @@
                 <td class="align-middle">{{ user.created_at }}</td>
                 <td class="align-middle text-center">{{ user.deleted_at ?? '-' }}</td>
                 <td class="align-middle text-center" v-if="admin">
-                    <button :key="user.id" v-if="user.admin" @click="toggleAdmin(user.id)" class="btn btn-link p-0">
+                    <button :key="user.id" v-if="user.admin" @click="toggleAdmin(user.id)" class="btn btn-link p-0" :disabled="user.id === auth_user_id">
                         <i class="fas fa-check text-success"></i>
                     </button>
                     <button :key="user.id" v-if="!user.admin" @click="toggleAdmin(user.id)" class="btn btn-link p-0">
@@ -170,15 +170,17 @@ export default {
             })
         },
         toggleAdmin(id) {
-            axios.post('/api/user/make-admin', {
-                id: id,
-            }, {
-                headers: {
-                    Authorization: 'Bearer ' + localStorage.remember_token,
-                }
-            }).then(r => {
-                this.fetchUsers();
-            })
+            if (id !== this.auth_user_id) {
+                axios.post('/api/user/make-admin', {
+                    id: id,
+                }, {
+                    headers: {
+                        Authorization: 'Bearer ' + localStorage.remember_token,
+                    }
+                }).then(r => {
+                    this.fetchUsers();
+                })
+            }
         },
         favoriteUser(id) {
             axios.post('/api/user/favorite', {

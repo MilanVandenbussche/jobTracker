@@ -25,7 +25,7 @@ return new class extends Migration
             $table->unsignedBigInteger('language_id');
             $table->string('job_title');
             $table->text('job_company');
-            $table->text('job_description')->nullable();
+            $table->text('job_description');
             $table->text('job_qualifications');
             $table->text('job_offer');
             $table->timestamps();

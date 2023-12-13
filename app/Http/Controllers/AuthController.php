@@ -46,7 +46,7 @@ class AuthController extends Controller
         $this->validate($request, [
             "first_name" => "required|string",
             "last_name" => "required|string",
-            "language" => "required",
+            "language_id" => "required",
             "email" => "required|email|unique:users,email",
             "password" => "required|string|regex:/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/u",
         ]);

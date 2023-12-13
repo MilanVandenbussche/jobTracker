@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('first_name');
             $table->string('last_name');
             $table->string('password');
-            $table->boolean('admin');
+            $table->boolean('admin')->default(false);
             $table->unsignedBigInteger('language_id');
             $table->string('email')->unique();
             $table->unsignedBigInteger('media_id')->nullable();

@@ -33,7 +33,9 @@ const store = createStore({
     },
     actions: {
         signOut() {
-            axios.post('api/logout').then(() => {
+            axios.post('api/logout', {
+                'user_id': localStorage.getItem('user_id'),
+            }).then(() => {
                 this.commit('setAuthentication', false);
                 this.commit('setAdmin', false);
                 this.commit('changePage', 'login');
