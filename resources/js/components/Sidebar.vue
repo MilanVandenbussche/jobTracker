@@ -1,6 +1,6 @@
 <template>
         <section class="position-fixed col-2 vh-100 py-5 d-flex flex-column align-items-center position-relative shadow">
-            <div class="d-flex flex-column align-items-center">
+            <div class="d-flex flex-column align-items-center cursor-default">
                 <h1 class="text-center fw-semibold align-self-center">JobTrackr</h1>
                 <div class="border border-2 border-primary w-px-50 ms-5 me-n5 mt-n2"></div>
             </div>
